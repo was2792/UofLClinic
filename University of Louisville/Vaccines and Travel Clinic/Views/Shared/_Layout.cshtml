@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <style>
     .nav > li > a {
         position: relative;
@@ -31,8 +31,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    
-                    
+
+
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Services <span class="caret"></span></a>
@@ -53,7 +53,7 @@
                         </ul>
                     </li>
 
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyUsers") || User.IsInRole("CanViewUsers") || User.IsInRole("CanModifyInventory") || User.IsInRole("CanViewInventory") )
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyUsers") || User.IsInRole("CanViewUsers"))
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Accounts <span class="caret"></span></a>
@@ -61,9 +61,13 @@
                                 <li>@Html.ActionLink("Users", "Index", "Users")</li>
                                 <li>@Html.ActionLink("Groups", "Index", "Groups")</li>
                                 <li>@Html.ActionLink("Permissions", "Index", "Roles")</li>
-                               
+
                             </ul>
                         </li>
+                    }
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyInventory") || User.IsInRole("CanViewInventory"))
+                    {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Inventory <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -74,13 +78,25 @@
                                 <li>@Html.ActionLink("Items", "Index", "Items")</li>
                                 <li class="divider"></li>
                                 <li>@Html.ActionLink("Sale Lines", "Index", "SaleLines")</li>
-                                <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
+                                <li>@Html.ActionLink("Sale", "Index", "Sales")</li>
                                 <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
                                 <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
                             </ul>
                         </li>
+                    }
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanViewDashboard"))
+                    {
                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
+                    }
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyCalendar") || User.IsInRole("CanViewCalendar"))
+                    {
                         <li>@Html.ActionLink("Calendar", "Index", "Calendar")</li>
+                    }
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanViewOneDrive"))
+                    {
                         <li><a href="https://cardmaillouisville.sharepoint.com/_layouts/groupstatus.aspx?id=3538531e-3deb-4930-8277-48afd53b8b83&target=documents" target="_blank">OneDrive</a></li>
                     }
                 </ul>
