@@ -1,0 +1,68 @@
+﻿@model Vaccines_and_Travel_Clinic.Models.Sale
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="row">&nbsp;</div>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <h3>Delete Sale</h3>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Customer Locale")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.DisplayAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Location")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="row">&nbsp;</div>
+@Html.Label("Are you sure you want to Delete this sale?")
+        <div class="row">&nbsp;</div>
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-6">
+                <button type="submit" class="btn btn-danger pull-right right-pulled-button-space">
+                    <span class="glyphicon glyphicon-alert"></span>
+                    Delete
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-default pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Cancel
+                </a>
+            </div>
+        </div>
+    }
+</div>
+</div>
+</div>

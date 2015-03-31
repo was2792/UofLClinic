@@ -1,0 +1,139 @@
+﻿@model IEnumerable<Vaccines_and_Travel_Clinic.Models.Location>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">&nbsp;</div>
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <h3>Locations</h3>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyInventory"))
+{
+    <a class="btn btn-success pull-right" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Add Location
+    </a>
+}
+else if (Request.IsAuthenticated && User.IsInRole("CanViewInventory"))
+{
+    <p>You don't have permission to add new Locations.</p>
+}
+    </div>
+</div>
+
+<div class="row">&nbsp;</div>
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayAddress)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayAddress)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>*@
+            <td class="text-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog text-warning"></span> <span class="caret"></span>
+                    </button>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyInventory"))
+{
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li>
+            <a href="@Url.Action("Details", new { id = item.ID })">
+                <span class="glyphicon glyphicon-comment"></span>
+                Details
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Edit", new { id = item.ID })">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Edit
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a href="@Url.Action("Delete", new { id = item.ID })">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete
+            </a>
+        </li>
+    </ul>
+}
+else if (Request.IsAuthenticated && User.IsInRole("CanViewInventory"))
+{
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li>
+            <a href="@Url.Action("Details", new { id = item.ID })">
+                <span class="glyphicon glyphicon-comment"></span>
+                Details
+            </a>
+        </li>
+    </ul>
+}
+                </div>
+            </td>
+    </tr>
+}
+
+</table>
+</div>
+</div>
