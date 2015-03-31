@@ -1,54 +1,97 @@
-﻿@model IEnumerable<IdentitySample.Models.ApplicationGroup>
+@model IEnumerable<IdentitySample.Models.ApplicationGroup>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyUsers"))
-    {
-        <div>@Html.ActionLink("Create New", "Create")</div>
-    }
-    else if (Request.IsAuthenticated && User.IsInRole("CanViewUsers"))
-    {
-    <p>You don't have permission to create new groups.</p>
-    }
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyUsers"))
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <h3>Index</h3>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyUsers"))
+        {
+            <a class="btn btn-success pull-right" href="@Url.Action("Create")">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                Add Group
+            </a>
+        }
+        else if (Request.IsAuthenticated && User.IsInRole("CanViewUsers"))
+        {
+            <p>You don't have permission to add new groups.</p>
+        }
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
             {
-              <div>@Html.ActionLink("Edit", "Edit", new { id=item.Id })</div>
-              <div>@Html.ActionLink("Details", "Details", new { id=item.Id })</div>
-              <div>@Html.ActionLink("Delete", "Delete", new { id=item.Id })</div>  
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-cog text-warning"></span> <span class="caret"></span>
+                            </button>
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyUsers"))
+                            {
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li>
+                                        <a href="@Url.Action("Details", new { id = item.Id })">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                            Details
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Edit", new { id = item.Id })">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="@Url.Action("Delete", new { id = item.Id })">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                            else if (Request.IsAuthenticated && User.IsInRole("CanViewUsers"))
+                            {
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li>
+                                        <a href="@Url.Action("Details", new { id = item.Id })">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                            Details
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    </td>
+                </tr>
             }
-            else if (Request.IsAuthenticated && User.IsInRole("CanViewUsers"))
-            {
-                <div>@Html.ActionLink("Details", "Details", new { id=item.Id })</div>
-            }
-            
-        </td>
-    </tr>
-}
-
-</table>
+        </table>
+    </div>
+</div>
