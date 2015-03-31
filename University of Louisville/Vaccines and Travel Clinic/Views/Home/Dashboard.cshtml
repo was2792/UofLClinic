@@ -11,10 +11,14 @@
 
     using (ClinicContext db = new ClinicContext())
     {
-        sales = db.Sales.Where(s => s.Date <= @DateTime.Now).Count();
-        orders = db.Orders.Where(o => o.Date <= @DateTime.Now).Count();
+        sales = db.Sales.Count();
+        orders = db.Orders.Count();
         items = db.Items.Sum(i => i.Count);
-        appointments = db.Appointment.Where(a => a.DateTime <= @DateTime.Now).Count();
+    }
+    
+    using (CalendarContext db = new CalendarContext())
+    {
+        appointments = db.Appointments.Count();
     }
 }
 
@@ -208,16 +212,9 @@
     $.get('@Url.Action("Appointments")', function (result) {
         new Morris.Donut({
             element: 'donut-chart',
-            xkey: 'month',
-            ykeys: ['value'],
-            labels: ['Appointments'],
             hideHover: 'auto',
             resize: true,
             data: result,
-            preUnits: '$',
-            parseTime: false,
-            //xLabelAngle: 70,
-            xLabels: "month",
         });
     });
 </script>

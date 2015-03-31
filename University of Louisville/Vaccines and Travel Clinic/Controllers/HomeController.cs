@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -165,23 +165,25 @@ namespace IdentitySample.Controllers
 
         public ActionResult Appointments()
         {
-            using (ClinicContext db = new ClinicContext())
+            var months = new[] { "", "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct", "Nov.", "Dec." };
+
+            using (CalendarContext db = new CalendarContext())
             {
-                var sales = db.Sales
-                    .Where(s => s.Date.Year == DateTime.Now.Year)
-                    .Select(s => new
+                var sales = db.Appointments
+                    .Where(a => a.StartDate.Year == DateTime.Now.Year)
+                    .Select(a => new
                     {
-                        date = s.Date,
-                        value = db.SaleLines.Where(sl => sl.SaleID == s.ID).Sum(sl => sl.Quantity * sl.Price)
+                        date = a.StartDate,
+                        value = a.Id
                     })
                     .ToList();
 
                 return Json(
-                        sales.GroupBy(s => s.date.Month)
-                             .Select(s => new
+                        sales.GroupBy(a => a.date.Month)
+                             .Select(a => new
                              {
-                                 month = s.Key,
-                                 value = s.Sum(x => x.value)
+                                 label = months[a.Key],
+                                 value = a.Count()
                              })
                              .ToList(),
                          JsonRequestBehavior.AllowGet
