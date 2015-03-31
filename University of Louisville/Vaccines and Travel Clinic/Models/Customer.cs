@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Crypteron.CipherDb;
+//using Crypteron.CipherDb;
 
 namespace Vaccines_and_Travel_Clinic.Models
 {
@@ -11,36 +11,36 @@ namespace Vaccines_and_Travel_Clinic.Models
     {
         public int ID { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public string City { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public string State { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         [DataType(DataType.PostalCode)]
         public string Zip { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public string Country { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public string Race { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public int Age { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public string Gender { get; set; }
 
-        [Secure]
+        //[Secure]
         [Required]
         public string Origin { get; set; }
 
