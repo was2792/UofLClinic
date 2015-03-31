@@ -8,7 +8,8 @@ namespace Vaccines_and_Travel_Clinic.Models
 {
     public class CalendarContext : DbContext
     {
-        public CalendarContext() : base()
+        public CalendarContext()
+            : base()
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<CalendarContext>());
         }
