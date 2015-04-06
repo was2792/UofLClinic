@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <style>
     .nav > li > a {
         position: relative;
@@ -90,9 +90,19 @@
                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
                     }
 
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyCalendar") || User.IsInRole("CanViewCalendar"))
+                    @if (Request.IsAuthenticated && User.IsInRole("CanViewCalendar") || User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Calendar", "Index", "Calendar")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Appointments<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Request Appointment", "Create", "Requests")</li>
+                                @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanModifyCalendar") )
+                                { 
+                                    
+                                 <li>@Html.ActionLink("Calendar", "Index", "Calendar")</li>
+                                }
+                            </ul>
+                        </li>
                     }
 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("CanViewOneDrive"))

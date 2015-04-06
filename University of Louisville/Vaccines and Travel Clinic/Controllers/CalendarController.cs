@@ -36,8 +36,10 @@ namespace Vaccines_and_Travel_Clinic.Controllers
             //Initialize scheduler dropdowns and agenda view
             var scheduler = new DHXScheduler(this);
             var patientDropDown = new LightboxSelect("patient", "Patient ID");
-            var roomDropDown = new LightboxSelect("room", "Room Number");
+            var roomDropDown = new LightboxSelect("room", "Room ");
             var agenda = new AgendaView();
+           
+
 
             //Add agenda view
             scheduler.Views.Add(agenda);
@@ -91,7 +93,9 @@ namespace Vaccines_and_Travel_Clinic.Controllers
             scheduler.Config.first_hour = 8;
             scheduler.Config.last_hour = 17;
             scheduler.Config.hour_date = "%h:%i%A";
-
+           
+            
+           
 
 
 
@@ -107,6 +111,11 @@ namespace Vaccines_and_Travel_Clinic.Controllers
 
 
             return View(scheduler);
+        }
+
+        public ActionResult test()
+        {
+            return View();
         }
 
         public ContentResult Data()

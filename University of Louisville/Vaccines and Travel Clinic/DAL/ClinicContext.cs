@@ -31,6 +31,7 @@ namespace Vaccines_and_Travel_Clinic.DAL
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Appointment> Appointment { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

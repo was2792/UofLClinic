@@ -1,4 +1,7 @@
-﻿@{
+﻿
+           
+
+@{
     ViewBag.Title = "Calendar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,4 +11,6 @@
 <div class="scheduler_container">
     @Html.Raw(Model.Render())
 </div>
+
+<iframe src="@Url.Action("Index","Requests")" width="1140" height="500"></iframe>
 
