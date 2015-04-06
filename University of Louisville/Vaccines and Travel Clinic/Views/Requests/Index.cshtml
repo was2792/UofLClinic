@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Vaccines_and_Travel_Clinic.Models.Request>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<html>
+<head>
+    <title>View</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <h2>Appointment Requests</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.patientNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.patientNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startTime)
+            </td>
+            <td>
+                
+               
+                @Html.ActionLink("Approve/Remove", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+        </div>
+    </body>
+</html>

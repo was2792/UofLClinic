@@ -37,7 +37,7 @@ namespace Vaccines_and_Travel_Clinic.Controllers
             var scheduler = new DHXScheduler(this);
             var patientDropDown = new LightboxSelect("patient", "Patient ID");
             var roomDropDown = new LightboxSelect("room", "Room ");
-            var agenda = new AgendaView();
+            var agenda = new WeekAgendaView();
            
 
 
